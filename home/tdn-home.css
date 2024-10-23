@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #333;
+  max-width: 100vw;
+  overflow-x: hidden;
+  padding: 0 30px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+element.style {
+  width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  color: #ff9900;
+}
+
+h2 strong {
+  color: #000;
+}
+
+h3 strong {
+  color: #000;
+}
+
+table {
+  width: 100%;
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #F4F5F7;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+a {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.confluence-information-macro-note {
+  border: #ffeaae solid 1px;
+  border-radius: 3px;
+  background-color: #FFFDF6;
+  padding: 5px;
+  margin: 15px;
+  width: 100%;
+}
+
+.confluence-information-macro-note .title {
+  font-weight: bold;
+}
+
+.confluence-information-macro-body {
+  font-size: 14px;
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: 60px;
+  margin-top: 10px;
+}
+
+ul li {
+  padding: 5px 0;
+}
+
+ul li a {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+}
+
+table.confluenceTable {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+}
+
+th.confluenceTh,
+td.confluenceTd {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+th.confluenceTh {
+  background-color: #F4F5F7;
+}
+
+tr:nth-child(even) .confluenceTd {
+  background-color: #f9f9f9;
+
+}
+
+.highlight-grey {
+  background-color: #f0f0f0;
+}
+
+.highlight-#f4f5f7 {
+  background-color: #f4f5f7;
+}
+
+.aui-icon {
+  margin-right: 5px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+}
+
+h2 {
+  margin-top: 30px;
+  margin-left: 20px;
+  color: #333;
+}
+
+h3 {
+  margin-top: 20px;
+  margin-left: 20px;
+  color: #333;
+}
+
+.content-wrapper {
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 10px 20px;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.indice {
+  text-align: left;
+  padding-left: 15px;
+}

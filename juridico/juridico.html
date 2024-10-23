@@ -1,0 +1,1218 @@
+<link rel="stylesheet" href="juridico.css">
+<!-- <script src="juridico.js"></script> -->
+<script>
+      document.addEventListener('DOMContentLoaded', function () {
+            const menuContainer = document.querySelector('.tabs-menu');
+            const panes = document.querySelectorAll('.deck-cards .tabs-pane');
+
+            // Function to remove all active classes and show only the active pane
+            function showPane(paneId) {
+                  panes.forEach(pane => {
+                        pane.classList.remove('active-pane');
+                        pane.style.display = 'none'; // Hide all panes
+                  });
+                  const activePane = document.getElementById(paneId);
+                  if (activePane) {
+                        activePane.classList.add('active-pane');
+                        activePane.style.display = 'block'; // Show the selected pane
+                  }
+            }
+
+            // Dynamically create menu based on labels
+            panes.forEach((pane, index) => {
+                  const label = pane.getAttribute('label') || `Tab ${index + 1}`; // Use 'label' attribute or a fallback name
+                  const paneId = pane.id;
+
+                  // Create a list item for each pane
+                  const menuItem = document.createElement('li');
+                  menuItem.textContent = label;
+                  menuItem.setAttribute('data-target', paneId);
+
+                  // Set the first one as active by default
+                  if (index === 0) {
+                        menuItem.classList.add('active');
+                  }
+
+                  // Add click event listener to switch panes
+                  menuItem.addEventListener('click', function () {
+                        // Remove 'active' class from all tabs
+                        document.querySelectorAll('.tabs-menu li').forEach(item => item.classList.remove('active'));
+
+                        // Add 'active' class to the clicked tab
+                        this.classList.add('active');
+
+                        // Show corresponding pane
+                        showPane(paneId);
+                  });
+
+                  // Append the menu item to the menu container
+                  menuContainer.appendChild(menuItem);
+            });
+
+            // Initially, ensure only the first pane is visible
+            if (panes.length > 0) {
+                  showPane(panes[0].id);
+            }
+      });
+
+      const tocLinks = document.querySelectorAll('#toc a');
+
+      tocLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                  event.preventDefault();
+                  const targetId = this.getAttribute('href').substring(1);
+                  const targetElement = document.getElementById(targetId);
+
+                  targetElement.scrollIntoView({ behavior: 'smooth' });
+            });
+      });
+</script>
+
+<div class="page view" id="content">
+      <div id="action-messages">
+      </div>
+      <!-- <div class="page-metadata">
+            <ul>
+                  <li class="page-metadata-modification-info">
+                        Created by
+                        <span class="author">
+                              <a aria-label="created by Nuria Fauró Campos" class="url fn" href="    /display/~nuria
+">
+                                    Nuria Fauró Campos
+                              </a>
+                        </span>
+                        , last modified by
+                        <span class="editor">
+                              <a aria-label="modified by Alan Pereira Ciarma" class="url fn" href="    /display/~alan.ciarma
+">
+                                    Alan Pereira Ciarma
+                              </a>
+                        </span>
+                        on
+                        <a aria-label="modified on 17 Oct, 2023, select to show changes" class="last-modified"
+                              href="/pages/diffpagesbyversion.action?pageId=243639934&amp;selectedPageVersions=19&amp;selectedPageVersions=20"
+                              title="Show changes">
+                              17 Oct, 2023
+                        </a>
+                  </li>
+            </ul>
+      </div> -->
+      <div class="wiki-content" id="main-content">
+            <div class="wiki-content">
+                  <h1 class="titulos indice" id="indice">
+                        Índice
+                  </h1>
+                  <ul class="indice-list" id="toc">
+                        <li><a href="#Objetivo">Objetivo</a></li>
+                        <li><a href="#MapaMental">Mapa Mental</a></li>
+                        <li><a href="#PrincipaisCampos">Principais Campos</a></li>
+                  </ul>
+                  <div class="toc-macro client-side-toc-macro conf-macro output-block" data-csslistindent="8.1.1"
+                        data-cssliststyle="none" data-excludeheaderregex=".*ndice" data-hasbody="false"
+                        data-headerelements="H1,H2,H3,H4,H5" data-macro-name="toc" data-numberedoutline="true">
+                  </div>
+                  </p>
+                  <h1 class="titulos" id="Objetivo">
+                        Objetivo
+                  </h1>
+                  <p class="nota">
+                        Permite ao advogado cadastrar as despesas e custas do processo, a cobrar futuramente junto com
+                        os honorários.
+                  </p>
+                  <div class="nota">
+                        <div class="confluence-information-macro confluence-information-macro-information"
+                              style="padding-left: 20px;">
+                              <p class="title conf-macro-render">
+                                    Nota
+                              </p>
+                              <span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon">
+                              </span>
+                              <div class="confluence-information-macro-body">
+                                    <p>
+                                          A chave de integração de
+                                          <strong>
+                                                Despesas e Garantias
+                                          </strong>
+                                          com o módulo Financeiro, depende da configuração do parâmetro
+                                          <a class="external-link"
+                                                href="http://tdn.totvs.com.br/pages/viewpage.action?pageId=239030162#GestãoJurídica-Protheus12-Parâmetros/Configurações"
+                                                rel="nofollow">
+                                                MV_JINTVAL
+                                          </a>
+                                          no qual são criados títulos com os valores de Despesas e Garantias na
+                                          inclusão, ou
+                                          se existe forma de correção (somente para
+                                          <strong>
+                                                Garantias
+                                          </strong>
+                                          ), gera-se o título na correção de valores.
+                                    </p>
+                                    <p>
+                                          Esta integração possui o parâmetro
+                                          <a class="external-link"
+                                                href="http://tdn.totvs.com.br/pages/viewpage.action?pageId=239030162#GestãoJurídica-Protheus12-Parâmetros/Configurações"
+                                                rel="nofollow">
+                                                MV_JALCADA
+                                          </a>
+                                          configurado para
+                                          <strong>
+                                                Controle de Alçada
+                                          </strong>
+                                          , no módulo
+                                          <strong>
+                                                Compras
+                                          </strong>
+                                          para
+                                          <strong>
+                                                Garantias e Despesas
+                                          </strong>
+                                          , para que antes da geração do título sejam efetuadas as aprovações.
+                                    </p>
+                                    <p>
+                                          Os valores de correção e juros de Garantias (além de valores de provisão,
+                                          correção e
+                                          juros de provisão) que possuem correção monetária são enviados para a
+                                          Contabilidade
+                                          e não para o Financeiro, por meio de títulos.
+                                    </p>
+                              </div>
+                        </div>
+                  </div>
+
+                  <p class="textos-gerais">
+                        Configure o parâmetro
+                        <a class="external-link"
+                              href="http://tdn.totvs.com.br/pages/viewpage.action?pageId=239030162#GestãoJurídica-Protheus12-Parâmetros/Configurações"
+                              rel="nofollow">
+                              MV_JTVENDP
+                        </a>
+                        para bloquear as operações quando o processo está encerrado.
+                        <br>
+                        Configure o parâmetro
+                        <a class="external-link"
+                              href="http://tdn.totvs.com.br/pages/viewpage.action?pageId=239030162#GestãoJurídica-Protheus12-Parâmetros/Configurações"
+                              rel="nofollow">
+                              MV_JNATDES
+                        </a>
+                        com a natureza da despesa.
+                        </br>
+                  </p>
+                  <h1 class="titulos" id="MapaMental">
+                        Mapa Mental
+                  </h1>
+                  <p class="textos-gerais">
+                        <span style="color: rgb(37,37,37);">
+                              Conheça neste diagrama as informações que contemplam as funcionalidades da rotina.
+                        </span>
+                  </p>
+                  <p>
+                        <span class="textos-gerais" style="color: rgb(37,37,37);">
+                              Verifique também quais são as condições prévias requeridas pela rotina bem como a
+                              configuração dos parâmetros.
+                        </span>
+                  </p>
+                  <p align="left">
+                        <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size">
+                              <img alt="" class="confluence-embedded-image" data-base-url="https://tdn.totvs.com"
+                                    data-image-src="/download/attachments/243639934/JURA099_396666.jpg?version=1&amp;modificationDate=1468255039000&amp;api=v2"
+                                    data-linked-resource-container-id="243639934"
+                                    data-linked-resource-container-version="20"
+                                    data-linked-resource-content-type="image/jpeg"
+                                    data-linked-resource-default-alias="JURA099_396666.jpg"
+                                    data-linked-resource-id="243641637" data-linked-resource-type="attachment"
+                                    data-linked-resource-version="1" draggable="false" height="250"
+                                    src="/images/JURA1.jpg" />
+                        </span>
+                  </p>
+                  <p align="left" class="textos-gerais">
+                        Na página principal da rotina, estão disponíveis as opções:
+                  </p>
+
+                  <div class="conf-macro output-block" data-hasbody="true" data-macro-name="deck">
+                        <a name="composition-deck-samples">
+                        </a>
+                        <div class="aui-tabs horizontal-tabs composition-deck" effectduration="0.5" effecttype="fade"
+                              history="false" id="samples" loopcards="false" nextafter="0.0">
+                              <ul class="tabs-menu top">
+                              </ul>
+                              <div class="deck-cards tabs-pane active-pane" style="padding-left: 40px;">
+                                    <div accesskey="" class="tabs-pane active-pane" cssclass="" effectduration="-1.0"
+                                          effecttype="" id="1" label="Incluir" nextafter="0" style="" title="">
+                                          <p>
+                                                Os campos indicados com (*) são de preenchimento obrigatório;
+                                          </p>
+                                          <p align="left">
+                                                Preencha as informações de acordo com as orientações descritas em
+                                                <strong>
+                                                      <a
+                                                            href="#DespesaseCustasJURA099GestãoJurídicaP12-principaiscampos">
+                                                            Principais Campos
+                                                      </a>
+                                                </strong>
+                                                .
+                                          </p>
+                                          <p align="left">
+                                                Veja também as funcionalidades disponíveis em
+                                                <strong>
+                                                      <a class="external-link"
+                                                            href="https://tdn.totvs.com/pages/viewpage.action?pageId=238037456"
+                                                            rel="nofollow">
+                                                            Outras Ações
+                                                      </a>
+                                                </strong>
+                                                <strong>
+                                                      .
+                                                </strong>
+                                          </p>
+                                          <ol>
+                                                <li>
+                                                      <span
+                                                            style="line-height: 1.42857;background-color: rgb(255,255,255);">
+                                                            Observe a distribuição dos campos na tela;
+                                                      </span>
+                                                </li>
+                                                <li>
+                                                      Os campos com sombreamento são preenchidos automaticamente pelo
+                                                      sistema;
+                                                </li>
+                                                <li>
+                                                      Alguns campos dispõe de consulta padrão, acessível pela lupa ou
+                                                      utilizando F3;
+                                                </li>
+                                                <li>
+                                                      Preencha os dados conforme orientações do help de campo.
+                                                </li>
+                                                <li>
+                                                      Confira e clique em
+                                                      <strong>
+                                                            Salvar e Criar Novo
+                                                      </strong>
+                                                      ,
+                                                      <strong>
+                                                            Confirmar
+                                                      </strong>
+                                                      ou
+                                                      <strong>
+                                                            Fechar.
+                                                      </strong>
+                                                      <strong>
+                                                      </strong>
+                                                </li>
+                                          </ol>
+                                    </div>
+                                    <div accesskey="" class="tabs-pane active-pane" cssclass="" effectduration="-1.0"
+                                          effecttype="" id="2" label="Alterar" nextafter="0" style="" title="">
+                                          <ol>
+                                                <li>
+                                                      Para efetuar uma alteração, localize o item que se quer alterar;
+                                                </li>
+                                                <li>
+                                                      Alguns campos estão com sombreamento, o que significa que estes
+                                                      não podem ser alterados;
+                                                </li>
+                                                <li>
+                                                      Preencha as informações de acordo com as orientações descritas em
+                                                      <strong>
+                                                            <a
+                                                                  href="#DespesaseCustasJURA099GestãoJurídicaP12-principaiscampos">
+                                                                  Principais Campos
+                                                            </a>
+                                                      </strong>
+                                                      .
+                                                </li>
+                                                <li>
+                                                      Veja também as funcionalidades disponíveis em
+                                                      <strong>
+                                                            <a class="external-link"
+                                                                  href="https://tdn.totvs.com/pages/viewpage.action?pageId=238037456"
+                                                                  rel="nofollow">
+                                                                  Outras Ações
+                                                            </a>
+                                                      </strong>
+                                                      <strong>
+                                                            .
+                                                      </strong>
+                                                </li>
+                                                <li>
+                                                      <span>
+                                                            Após efetuar os ajustes, clique em:
+                                                      </span>
+                                                </li>
+                                          </ol>
+                                          <ul>
+                                                <li>
+                                                      <strong>
+                                                            Fechar
+                                                      </strong>
+                                                      (para sair sem salvar a alteração);
+                                                </li>
+                                                <li>
+                                                      <strong>
+                                                            Salvar e Criar Novo
+                                                      </strong>
+                                                      (salva a alteração e mantêm o formulário para uma nova inclusão)
+                                                </li>
+                                                <li>
+                                                      <strong>
+                                                            Confirmar
+                                                      </strong>
+                                                      (salva a alteração e retorna à página inicial)
+                                                </li>
+                                          </ul>
+                                    </div>
+                                    <div accesskey="" class="tabs-pane" cssclass="" effectduration="-1.0" effecttype=""
+                                          id="3" label="Visualizar" nextafter="0" style="" title="">
+                                          <p>
+                                                Para visualizar a informação cadastrada, posicione primeiro o cursor no
+                                                item e clique na opção
+                                                <strong>
+                                                      Visualizar
+                                                </strong>
+                                                à esquerda.
+                                          </p>
+                                          <p>
+                                                Nesta opção não é possível efetuar alterações.
+                                          </p>
+                                    </div>
+                                    <div accesskey="" class="tabs-pane" cssclass="" effectduration="-1.0" effecttype=""
+                                          id="4" label="Excluir" nextafter="0" style="" title="">
+                                          <p>
+                                                <strong>
+                                                      Outras Ações / Excluir
+                                                </strong>
+                                          </p>
+                                          <p>
+                                                No acesso à rotina são apresentados todos os cadastros efetuados;
+                                          </p>
+                                          <ol>
+                                                <li>
+                                                      Para efetuar uma exclusão, localize primeiramente o item que
+                                                      deseja excluir;
+                                                </li>
+                                          </ol>
+                                          <p style="margin-left: 30.0px;">
+                                                2. Clique na opção
+                                                <strong>
+                                                      Excluir;
+                                                </strong>
+                                          </p>
+                                          <p>
+                                                No alto da tela visualize esta mensagem sombreada:
+                                          </p>
+                                          <p style="margin-left: 30.0px;">
+                                                <strong>
+                                                      Tem certeza que deseja excluir o item abaixo?
+                                                </strong>
+                                          </p>
+                                          <p style="margin-left: 30.0px;">
+                                                <strong>
+                                                      Esta opção não poderá ser desfeita após a confirmação da exclusão.
+                                                </strong>
+                                          </p>
+                                          <p>
+                                                Certifique-se e para prosseguir, clique em:
+                                          </p>
+                                          <ul>
+                                                <li>
+                                                      <strong>
+                                                            Fechar
+                                                      </strong>
+                                                      (para sair sem salvar a exclusão);
+                                                </li>
+                                                <li>
+                                                      <strong>
+                                                            Confirmar
+                                                      </strong>
+                                                      (exclui o item e retorna à página inicial).
+                                                </li>
+                                          </ul>
+                                    </div>
+                                    <div accesskey="" class="tabs-pane" cssclass="" effectduration="-1.0" effecttype=""
+                                          id="5" label="Anexos" nextafter="0" style="" title="">
+                                          <p>
+                                                Acesse
+                                                <strong>
+                                                      Outras Ações / Anexos
+                                                </strong>
+                                          </p>
+                                          <p>
+                                                Configure o parâmetro
+                                                <a class="external-link"
+                                                      href="https://tdn.totvs.com/pages/viewpage.action?pageId=239030162#Gest%C3%A3oJur%C3%ADdica-Protheus12-Par%C3%A2metros/Configura%C3%A7%C3%B5es"
+                                                      rel="nofollow">
+                                                      MV_JDOCUME
+                                                </a>
+                                                para visualizar o acesso a esta funcionalidade na rotina.
+                                          </p>
+                                          <p>
+                                                Esta opção está disponível no botão
+                                                <strong>
+                                                      Outras Ações
+                                                </strong>
+                                                da tela principal de
+                                                <strong>
+                                                      Despesas / Custas
+                                                </strong>
+                                                ou
+                                                <strong>
+                                                      Alterando
+                                                </strong>
+                                                uma despesa específica
+                                                <strong>
+                                                      ;
+                                                </strong>
+                                          </p>
+                                          <ul>
+                                                <li>
+                                                      Selecione novamente
+                                                      <strong>
+                                                            Outras Ações / Anexos
+                                                      </strong>
+                                                </li>
+                                          </ul>
+                                          <p style="margin-left: 30.0px;">
+                                                Nesta tela é possível Importar, Exportar ou Excluir um documento.
+                                          </p>
+                                          <p style="margin-left: 30.0px;">
+                                                <span style="color: rgb(23,43,77);">
+                                                      Ao Importar/ Excluir um documento é possível acessa-lo/ elimina-lo
+                                                      da rotina de
+                                                </span>
+                                                <span style="color: rgb(23,43,77);">
+                                                </span>
+                                                <strong>
+                                                      Contas a Pagar
+                                                </strong>
+                                                <span style="color: rgb(23,43,77);">
+                                                </span>
+                                                <span style="color: rgb(23,43,77);">
+                                                      do Financeiro, caso a integração esteja ativa.
+                                                </span>
+                                          </p>
+                                    </div>
+                                    <div accesskey="" class="tabs-pane active-pane" cssclass="" effectduration="-1.0"
+                                          effecttype="" id="6" label="Títulos" nextafter="0" style="" title="">
+                                          <p>
+                                                Acesse
+                                                <strong>
+                                                      Outras Ações / Títulos
+                                                </strong>
+                                          </p>
+                                          <p>
+                                                Esta opção habilita a tela para visualização do títulos do Contas a
+                                                Pagar.
+                                          </p>
+                                          <p>
+                                                Nesta opção não é permitido efetuar alterações.
+                                          </p>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+                  <h1 id="PrincipaisCampos">
+                        Principais Campos
+                        <span class="confluence-anchor-link conf-macro output-inline" data-hasbody="false"
+                              data-macro-name="anchor" id="DespesaseCustasJURA099GestãoJurídicaP12-principaiscampos">
+                        </span>
+                  </h1>
+                  <div class="table-wrap table-2">
+                        <table class="wrapped confluenceTable">
+                              <colgroup>
+                                    <col />
+                                    <col />
+                              </colgroup>
+                              <tbody>
+                                    <tr>
+                                          <td class="highlight-blue confluenceTd title-table"
+                                                data-highlight-colour="blue">
+                                                <strong>
+                                                      Campo
+                                                </strong>
+                                          </td>
+                                          <td class="highlight-blue confluenceTd title-table"
+                                                data-highlight-colour="blue">
+                                                <p style="text-align: center;">
+                                                      <strong>
+                                                            Descrição
+                                                      </strong>
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd">
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            <strong>
+                                                                  Cód. Assunto
+                                                            </strong>
+                                                      </span>
+                                                </p>
+                                          </td>
+                                          <td class="confluenceTd">
+                                                <p>
+                                                      Utilize a lupa ou a tecla F3 para localizar o código do assunto
+                                                      jurídico.
+                                                </p>
+                                                <p>
+                                                      Esta informação deve obrigatoriamente estar relacionada a um
+                                                      processo, cadastrado na tabela de Processos.
+                                                </p>
+                                                <p>
+                                                      <strong>
+                                                            Exemplo:
+                                                      </strong>
+                                                </p>
+                                                <p style="margin-left: 30.0px;">
+                                                      00000000002
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Fil Destino
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Utilize a lupa ou a tecla F3 para localizar o código do
+                                                            assunto jurídico.
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Informação relacionada com a filial origem do registro.
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            <strong>
+                                                                  Exemplo:
+                                                            </strong>
+                                                      </span>
+                                                </p>
+                                                <p style="margin-left: 30.0px;">
+                                                      <span style="color: rgb(0,0,0);">
+                                                            M SP 01 Filial São Paulo
+                                                      </span>
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Cód. Tipo
+                                                      </span>
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            <span style="color: rgb(0,0,0);">
+                                                                  Utilize a lupa ou a tecla F3 para localizar o código
+                                                                  do tipo.
+                                                                  <br />
+                                                            </span>
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            <span style="color: rgb(0,0,0);">
+                                                                  Este campo só aceita códigos de tipo de despesas
+                                                                  cadastrados na tabela Tipo de Despesa Jurídica.
+                                                            </span>
+                                                            .
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            <strong>
+                                                                  Exemplo:
+                                                            </strong>
+                                                      </span>
+                                                </p>
+                                                <p style="margin-left: 30.0px;">
+                                                      <span style="color: rgb(0,0,0);">
+                                                            001 Custas Processuais
+                                                      </span>
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Tipo
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                Campo informado automaticamente após selecionar o
+                                                <strong>
+                                                      Cód. Tipo.
+                                                </strong>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Cód. Moeda
+                                                      </span>
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Utilize a lupa ou a tecla F3 para localizar o código da
+                                                            moeda.
+                                                            <br />
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Este campo somente permite códigos de moedas cadastrados na
+                                                            tabela Moedas.
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            <strong>
+                                                                  Exemplo:
+                                                            </strong>
+                                                      </span>
+                                                </p>
+                                                <p style="margin-left: 30.0px;">
+                                                      <span style="color: rgb(0,0,0);">
+                                                            01 - Real
+                                                      </span>
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Símbolo
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <span style="color: rgb(0,0,0);">
+                                                      Campo informado automaticamente após selecionar o
+                                                </span>
+                                                <strong>
+                                                      Cód. Moeda.
+                                                </strong>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Valor
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <p>
+                                                      Informe o valor da despesa deste cadastro.
+                                                </p>
+                                                <p>
+                                                      <strong>
+                                                            Exemplo:
+                                                      </strong>
+                                                </p>
+                                                <p style="margin-left: 30.0px;">
+                                                      568,00
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Data Financ
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                Informe a data considerada no financeiro.
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Descrição
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                Adicione neste espaço, dados complementares e descritivos para
+                                                identificação da despesa.
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Pref
+                                                      </span>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            ixo
+                                                      </span>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Tít.
+                                                      </span>
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Campo referente à integração de despesas com o módulo
+                                                            Financeiro (Contas a Pagar) quando não controle de alçada.
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      O preenchimento pode se alfanumérico.
+                                                </p>
+                                                <p>
+                                                      <strong>
+                                                            Exemplo:
+                                                      </strong>
+                                                </p>
+                                                <p style="margin-left: 30.0px;">
+                                                      B21
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Natureza
+                                                      </span>
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Utilize a lupa ou a tecla F3 para localizar a natureza da
+                                                            operação.
+                                                            <br />
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Campo referente à integração de despesas com o módulo
+                                                            Financeiro.
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            <strong>
+                                                                  Exemplo:
+                                                            </strong>
+                                                      </span>
+                                                </p>
+                                                <p style="margin-left: 30.0px;">
+                                                      Desp
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Tipo Título
+                                                      </span>
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Utilize a lupa ou a tecla F3 para localizar o tipo de
+                                                            título.
+                                                            <br />
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Campo referente à integração de despesas com o módulo
+                                                            Financeiro.
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            <strong>
+                                                                  Exemplo:
+                                                            </strong>
+                                                      </span>
+                                                </p>
+                                                <p style="margin-left: 30.0px;">
+                                                      <span style="color: rgb(0,0,0);">
+                                                            NF
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <br />
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            <strong>
+                                                                  Obs.:
+                                                            </strong>
+                                                            Títulos que estejam marcados como deletados na tabela
+                                                            correspondente não serão apresentados no combo.
+                                                      </span>
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Fornecedor
+                                                      </span>
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Utilize a lupa ou a tecla F3 para localizar o fornecedor.
+                                                            <br />
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Campo referente à integração de despesas com o módulo
+                                                            Financeiro.
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            <strong>
+                                                                  Exemplo:
+                                                            </strong>
+                                                      </span>
+                                                </p>
+                                                <p style="margin-left: 30.0px;">
+                                                      <span style="color: rgb(0,0,0);">
+                                                            COR001
+                                                      </span>
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Loja
+                                                      </span>
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Campo referente à integração de despesas com o módulo
+                                                            Financeiro.
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            <strong>
+                                                                  Exemplo:
+                                                            </strong>
+                                                      </span>
+                                                </p>
+                                                <p style="margin-left: 30.0px;">
+                                                      <span style="color: rgb(0,0,0);">
+                                                            01
+                                                      </span>
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Nome fornec
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <span style="color: rgb(0,0,0);">
+                                                      Campo informado automaticamente após selecionar o
+                                                </span>
+                                                <strong>
+                                                      Fornecedor.
+                                                </strong>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Cond.Pagto.
+                                                      </span>
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Utilize a lupa ou a tecla F3 para localizar a condição de
+                                                            pagamento.
+                                                            <br />
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Campo referente à integração de despesas com o módulo
+                                                            Financeiro.
+                                                      </span>
+                                                </p>
+                                                <p>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            <strong>
+                                                                  Exemplo:
+                                                            </strong>
+                                                      </span>
+                                                </p>
+                                                <p style="margin-left: 30.0px;">
+                                                      <span style="color: rgb(0,0,0);">
+                                                            001
+                                                      </span>
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      <span style="color: rgb(0,0,0);">
+                                                            Produto
+                                                      </span>
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <p>
+                                                      Utilize a lupa ou a tecla F3 para localizar o produto.
+                                                </p>
+                                                <p>
+                                                      Campo referente à integração de despesas com o módulo Financeiro.
+                                                </p>
+                                                <p>
+                                                      <strong>
+                                                            Exemplo:
+                                                      </strong>
+                                                </p>
+                                                <p style="margin-left: 30.0px;">
+                                                      4000
+                                                </p>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Cliente
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                Campo preenchido automaticamente relacionado com os dados do Assunto
+                                                Jurídico.
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Loja
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <span style="color: rgb(0,0,0);">
+                                                      Campo preenchido automaticamente relacionado com os dados do
+                                                      Assunto Jurídico.
+                                                </span>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Razão Social
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <span style="color: rgb(0,0,0);">
+                                                      Campo preenchido automaticamente relacionado com os dados do
+                                                      Assunto Jurídico.
+                                                </span>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Num Caso
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <span style="color: rgb(0,0,0);">
+                                                      Campo preenchido automaticamente relacionado com os dados do
+                                                      Assunto Jurídico.
+                                                </span>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Titular Caso
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <span style="color: rgb(0,0,0);">
+                                                      Campo preenchido automaticamente relacionado com os dados do
+                                                      Assunto Jurídico.
+                                                </span>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Polo Ativo
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <span style="color: rgb(0,0,0);">
+                                                      Campo preenchido automaticamente relacionado com os dados do
+                                                      Assunto Jurídico.
+                                                </span>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Polo Passivo
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <span style="color: rgb(0,0,0);">
+                                                      Campo preenchido automaticamente relacionado com os dados do
+                                                      Assunto Jurídico.
+                                                </span>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Situação
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <span style="color: rgb(0,0,0);">
+                                                      Campo preenchido automaticamente relacionado com os dados do
+                                                      Assunto Jurídico.
+                                                </span>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Num Processo
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <span style="color: rgb(0,0,0);">
+                                                      Campo preenchido automaticamente relacionado com os dados do
+                                                      Assunto Jurídico.
+                                                </span>
+                                          </td>
+                                    </tr>
+                                    <tr>
+                                          <td class="confluenceTd" colspan="1">
+                                                <strong>
+                                                      Data Distrib
+                                                </strong>
+                                          </td>
+                                          <td class="confluenceTd" colspan="1">
+                                                <span style="color: rgb(0,0,0);">
+                                                      Campo preenchido automaticamente relacionado com os dados do
+                                                      Assunto Jurídico.
+                                                </span>
+                                          </td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </div>
+            </div>
+      </div>
+      <div class="pageSection group" id="labels-section">
+            <div class="labels-section-content content-column" entityid="243639934" entitytype="page">
+                  <div class="labels-content">
+                        <ul class="label-list label-list-right">
+                              <li class="aui-label" data-label-id="188317915">
+                                    <a class="aui-label-split-main" href="/label/PROT/documento_de_referencia"
+                                          rel="tag">
+                                          documento_de_referencia
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="205783243">
+                                    <a class="aui-label-split-main" href="/label/PROT/gestao_juridica" rel="tag">
+                                          gestao_juridica
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="210274218">
+                                    <a class="aui-label-split-main" href="/label/PROT/segmento_juridico" rel="tag">
+                                          segmento_juridico
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="202048389">
+                                    <a class="aui-label-split-main" href="/label/PROT/todos_paises" rel="tag">
+                                          todos_paises
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="199263529">
+                                    <a class="aui-label-split-main" href="/label/PROT/versao_12" rel="tag">
+                                          versao_12
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="201097543">
+                                    <a class="aui-label-split-main" href="/label/PROT/mensagem_unica" rel="tag">
+                                          mensagem_unica
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="203850783">
+                                    <a class="aui-label-split-main" href="/label/PROT/jura099" rel="tag">
+                                          jura099
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="243859565">
+                                    <a class="aui-label-split-main" href="/label/PROT/despesas_e_custas" rel="tag">
+                                          despesas_e_custas
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="235930765">
+                                    <a class="aui-label-split-main" href="/label/PROT/mv_jalcada" rel="tag">
+                                          mv_jalcada
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="243860697">
+                                    <a class="aui-label-split-main" href="/label/PROT/mv_jnatdes" rel="tag">
+                                          mv_jnatdes
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="243860698">
+                                    <a class="aui-label-split-main" href="/label/PROT/mv_jtvendp" rel="tag">
+                                          mv_jtvendp
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="235930817">
+                                    <a class="aui-label-split-main" href="/label/PROT/mv_jintval" rel="tag">
+                                          mv_jintval
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="235930191">
+                                    <a class="aui-label-split-main" href="/label/PROT/controle_de_alcada" rel="tag">
+                                          controle_de_alcada
+                                    </a>
+                              </li>
+                              <li class="aui-label" data-label-id="340590908">
+                                    <a class="aui-label-split-main" href="/label/PROT/squad_juridico_depto" rel="tag">
+                                          squad_juridico_depto
+                                    </a>
+                              </li>
+                        </ul>
+                  </div>
+            </div>
+      </div>
+      <div class="pageSection group" id="comments-section">
+      </div>
+</div>
